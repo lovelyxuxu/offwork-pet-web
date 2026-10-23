@@ -1,0 +1,22 @@
+[Unit]
+Description=Offwork Pet public website and character catalog
+After=network.target
+
+[Service]
+Type=simple
+User=offwork-web
+Group=offwork-web
+WorkingDirectory=/srv/offwork-pet-web
+Environment=OFFWORK_WEB_DATA=/var/lib/offwork-pet-web
+Environment=PYTHONUNBUFFERED=1
+ExecStart=/srv/offwork-pet-web/.venv/bin/python -m uvicorn portal.app:app --host 127.0.0.1 --port 8766 --workers 1 --proxy-headers --forwarded-allow-ips 127.0.0.1
+Restart=on-failure
+RestartSec=5
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectHome=true
+ProtectSystem=strict
+ReadWritePaths=/var/lib/offwork-pet-web
+
+[Install]
+WantedBy=multi-user.target

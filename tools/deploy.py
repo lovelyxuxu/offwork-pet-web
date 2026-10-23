@@ -100,10 +100,10 @@ if data.exists():
             f'sudo -n install -d -m 755 {quote(release)} && '
             f'sudo -n install -d -o offwork-web -g offwork-web -m 755 {quote(data)} && '
             f'sudo -n tar -xzf {quote(staging + "/source.tar.gz")} -C {quote(release)} && '
-            f'sudo -n python3 -m venv {quote(release + "/.venv")}')
+            f'sudo -n python3 -m venv --without-pip {quote(release + "/.venv")}')
         python = quote(release + '/.venv/bin/python')
         run('Install isolated website dependencies',
-            f'sudo -n {python} -m pip install --disable-pip-version-check -r {quote(release + "/requirements-dev.txt")}', 240)
+            f'sudo -n python3 -m pip --python {python} install --disable-pip-version-check -r {quote(release + "/requirements-dev.txt")}', 240)
         run('Run tests in the server runtime',
             f'cd {quote(release)} && sudo -n {python} -m unittest discover -s tests -v')
         for pack in packs:

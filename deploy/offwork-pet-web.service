@@ -6,10 +6,10 @@ After=network.target
 Type=simple
 User=offwork-web
 Group=offwork-web
-WorkingDirectory=/srv/offwork-pet-web
+WorkingDirectory=/srv/offwork-pet-web/current
 Environment=OFFWORK_WEB_DATA=/var/lib/offwork-pet-web
 Environment=PYTHONUNBUFFERED=1
-ExecStart=/srv/offwork-pet-web/.venv/bin/python -m uvicorn portal.app:app --host 127.0.0.1 --port 8766 --workers 1 --proxy-headers --forwarded-allow-ips 127.0.0.1
+ExecStart=/srv/offwork-pet-web/current/.venv/bin/python -m uvicorn portal.app:app --host 127.0.0.1 --port 8766 --workers 1 --proxy-headers --forwarded-allow-ips 127.0.0.1
 Restart=on-failure
 RestartSec=5
 NoNewPrivileges=true

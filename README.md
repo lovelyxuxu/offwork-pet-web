@@ -58,15 +58,23 @@ python -m portal.manage list
 
 包信息包含版本、格式版本、所需能力、大小、SHA-256、作者与许可。客户端接入时应对照自身能力判断兼容性，并继续使用原有暂存、校验、安装与更新回滚流程。
 
-## 未来部署：公开入口为 80 端口
+## 部署：公开入口为 80 端口
 
-本仓库附带 `deploy/nginx.conf` 与 `deploy/offwork-pet-web.service` 模板，尚未部署。
+本仓库附带 `deploy/nginx.conf`、`deploy/offwork-pet-web.service` 和 `tools/deploy.py`。部署工具从干净的 Git 提交生成源码归档，通过 SSH 上传并逐个核对 SHA-256；密码仅从标准输入读取，不写入文件或命令行。
 
-建议放置：代码 `/srv/offwork-pet-web`，运行数据 `/var/lib/offwork-pet-web`，系统用户 `offwork-web`。服务只监听 `127.0.0.1:8766`，由已有宿主机 Nginx 在 80 端口转发。无需重新启动旧网站的 Docker 容器。
+代码与独立虚拟环境按版本放在 `/srv/offwork-pet-web/releases/`，`/srv/offwork-pet-web/current` 指向当前版本。运行数据位于 `/var/lib/offwork-pet-web`，服务用户为 `offwork-web`。服务只监听 `127.0.0.1:8766`，由已有宿主机 Nginx 在 80 端口转发。无需重新启动旧网站的 Docker 容器。
 
-模板继续引入桌宠已有的 `/etc/nginx/snippets/offwork-pet.conf`，保留搭子 `/health`、`/v1/`、`/v2/` 和软件 `/offwork-pet/updates/`、`/offwork-pet/releases/`。签名文件、发布私钥和桌宠数据库仍由原项目管理。网站数据库与搭子数据库各自独立。
+配置继续引入桌宠已有的 `/etc/nginx/snippets/offwork-pet.conf`，保留搭子 `/health`、`/v1/`、`/v2/` 和软件 `/offwork-pet/updates/`、`/offwork-pet/releases/`，同时保留已有钉钉 `/webhook`、`/ds-alert` 及单独的 8080 站点。旧网站首页、API、管理页及其专属路由由新站点替代。签名文件、发布私钥和桌宠数据库仍由原项目管理。网站数据库与搭子数据库各自独立。
 
-真正切换前需备份 Nginx 配置和内容数据，检查 `sites-enabled` 中旧默认站点及其备份文件，逐项确认其他网站路由是否保留；不能把备份站点配置留在通配加载目录中。创建服务用户及上述目录、建立虚拟环境、安装依赖并导入内容后，再启用服务。运行 `nginx -t` 成功后才重载；随后验证网站、角色下载、搭子健康、更新清单及原有连接接口。若失败，恢复配置并重载即可回退。
+工具先把 Nginx 配置、原服务单元和已有目录数据备份到 `/var/backups/offwork-pet-web/<时间戳>/`；已有 SQLite 使用备份 API 生成一致快照。服务器运行测试通过后导入角色和线上软件版本清单，先检查内部服务，再运行 `nginx -t` 并重载入口。失败时尝试恢复原路由和服务；保留内容备份以便进一步恢复。三个已识别的旧默认站点备份会移出 `sites-enabled`，避免通配加载产生重复站点。
+
+```powershell
+python -m pip install -r requirements-deploy.txt
+# 先按同级 offwork-pet/docs/server-access.md 使用 Import-Clixml 读取凭据。
+$deploymentCredential.GetNetworkCredential().Password | python tools/deploy.py --packs ..\offwork-pet\offwork_pet\assets\starter-packs
+```
+
+工具会记录源码提交、服务器发布目录和备份目录到本机 `outputs/last-deployment.json`。真正部署后还应从外网检查网站页面、实际角色下载、更新包，以及搭子接口。部署工具针对当前服务器配置；换服务器前应重新检查路由与系统环境。
 
 ## 验证
 

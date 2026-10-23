@@ -60,6 +60,8 @@ python -m portal.manage list
 
 ## 部署：公开入口为 80 端口
 
+已于 2026-10-23 部署到 http://106.54.27.8/ 。服务器路径、备份及实际验证结果见 [线上部署记录](docs/线上部署.md)。
+
 本仓库附带 `deploy/nginx.conf`、`deploy/offwork-pet-web.service` 和 `tools/deploy.py`。部署工具从干净的 Git 提交生成源码归档，通过 SSH 上传并逐个核对 SHA-256；密码仅从标准输入读取，不写入文件或命令行。
 
 代码与独立虚拟环境按版本放在 `/srv/offwork-pet-web/releases/`，`/srv/offwork-pet-web/current` 指向当前版本。运行数据位于 `/var/lib/offwork-pet-web`，服务用户为 `offwork-web`。服务只监听 `127.0.0.1:8766`，由已有宿主机 Nginx 在 80 端口转发。无需重新启动旧网站的 Docker 容器。

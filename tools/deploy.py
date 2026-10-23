@@ -141,8 +141,21 @@ for name in ['default.bak.202606151643','default.bak.admin','default.bak.pre-xin
             'sudo -n python3 -c ' + quote(disable_backups) + ' ' + quote(backup) + ' && '
             f'sudo -n install -m 644 {quote(release + "/deploy/nginx.conf")} /etc/nginx/sites-enabled/default && '
             'sudo -n nginx -t && sudo -n systemctl reload nginx')
-        run('Check public site and original desktop health',
-            'curl --fail --silent --show-error --max-time 10 http://127.0.0.1/api/catalog/health && '
+        # nginx reload is asynchronous: an immediately following connection
+        # can still reach an old worker and its former upstream. Wait for the
+        # expected service response before declaring the switch successful.
+        for attempt in range(12):
+            try:
+                health = run('Wait for the new public routing',
+                    'curl --fail --silent --show-error --max-time 5 http://127.0.0.1/api/catalog/health', 10)
+                if json.loads(health).get('service') != 'offwork-pet-web':
+                    raise ValueError('Old routing is still serving requests.')
+                break
+            except (RuntimeError, ValueError):
+                if attempt == 11:
+                    raise
+                time.sleep(1)
+        run('Check original desktop health',
             'curl --fail --silent --show-error --max-time 10 http://127.0.0.1/health')
         record = {'revision': revision, 'release': release, 'backup': backup, 'data': data,
                   'previous_release': previous, 'character_packages': [path.name for path in packs],

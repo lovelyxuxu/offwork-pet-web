@@ -122,6 +122,35 @@ class CatalogTests(unittest.TestCase):
         self.assertEqual(self.client.get('/api/catalog/not-present').status_code, 404)
         self.assertEqual(self.client.get('/media/../catalog.sqlite3').status_code, 404)
 
+    def test_dialogue_catalog_is_character_bound_readonly_and_download_matches(self):
+        from unittest.mock import patch
+        from portal.dialogues import dialogue_items, public
+        self.catalog.import_pack(self.pack())
+        source = Path(__file__).resolve().parents[1] / 'static/dialogue-packs/gugagaga-daily.petdialogue'
+        data = json.loads(source.read_text(encoding='utf-8'))
+        data['characterId'] = 'cloud.friend'
+        directory = self.root / 'dialogues'
+        directory.mkdir()
+        path = directory / 'sample.petdialogue'
+        path.write_text(json.dumps(data, ensure_ascii=False), encoding='utf-8')
+        actual_loader = dialogue_items
+        with patch('portal.app.dialogue_items', side_effect=lambda _, catalog: actual_loader(directory, catalog)):
+            response = self.client.get('/api/catalog/characters/cloud.friend/dialogues')
+            self.assertEqual(response.status_code, 200)
+            item = response.json()['items'][0]
+            self.assertEqual((item['sceneCount'], item['lineCount']), (30, 360))
+            self.assertNotIn('_path', item)
+            downloaded = self.client.get(item['download_url'])
+            self.assertEqual(downloaded.content, path.read_bytes())
+            self.assertEqual(hashlib.sha256(downloaded.content).hexdigest(), item['sha256'])
+            self.assertIn('.petdialogue', downloaded.headers['content-disposition'])
+            self.assertEqual(self.client.post('/api/catalog/dialogues', json={}).status_code, 405)
+            self.assertEqual(self.client.get('/api/catalog/characters/unknown/dialogues').status_code, 404)
+            self.catalog.set_visible('cloud.friend', False)
+            self.assertEqual(self.client.get('/api/catalog/dialogues').json()['items'], [])
+            self.assertEqual(self.client.get(item['download_url']).status_code, 404)
+        self.assertEqual(self.client.get('/dialogues').status_code, 200)
+
     def test_release_metadata_and_url_validation(self):
         path = self.root / 'latest.json'
         value = {'version': '0.6.0-preview.2', 'url':'https://example.com/release.zip',

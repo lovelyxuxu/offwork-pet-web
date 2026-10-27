@@ -1,0 +1,888 @@
+{
+  "format": "offwork-pet.dialogue/v1",
+  "id": "gugagaga.daily.zh-CN",
+  "version": "1.0.0",
+  "displayName": "咕嘎日常 · 工位陪伴",
+  "characterId": "gugagaga",
+  "locale": "zh-CN",
+  "medium": "text",
+  "description": "有点贪吃、有点抽象，认真陪伴你的咕咕嘎嘎。原创文字台词试用包。",
+  "credits": {
+    "text": "本项目原创台词草案",
+    "character": "角色形象与素材署名沿用对应角色包，本文件不包含或重新授权角色素材。"
+  },
+  "selection": {
+    "activePacksPerCharacter": 1,
+    "linesPerAppearance": 1,
+    "strategy": "shuffle-bag-per-scene",
+    "avoidRecentLines": 12,
+    "avoidRecentSemanticGroups": 2,
+    "onMissingScene": "skip",
+    "onCharacterChange": "discard-pending-and-switch-pool",
+    "onResume": "drop-expired",
+    "respectHostVisibilityAndQuietSettings": true
+  },
+  "presentation": {
+    "seconds": 8,
+    "sound": false,
+    "wordWrap": true
+  },
+  "scheduleDefaults": {
+    "breakfast": "08:00",
+    "lunch": "12:00",
+    "dinner": "18:30"
+  },
+  "scenes": [
+    {
+      "id": "guga.morning-arrival",
+      "label": "早间咕嘎报到",
+      "trigger": "app.launch",
+      "when": {
+        "localTime": [
+          "06:00",
+          "10:00"
+        ],
+        "firstLaunchOfDay": true
+      },
+      "priority": 80,
+      "cooldownSeconds": 3600,
+      "semanticGroup": "arrival",
+      "maxPerDay": 1,
+      "lines": [
+        "早呀！今日份咕嘎，已送达你的桌面。",
+        "早！脑袋还在加载，咕嘎已经上线。",
+        "早上好，今天的桌面先长出一只小企鹅。",
+        "咕嘎报到！今天也一起慢慢来。",
+        "新的一天，先把可爱放到你旁边。",
+        "早呀，今天想从哪件小事开始？",
+        "今日陪伴开机成功。聪明程度，随缘。",
+        "早间频道已接通，主持企鹅就位。",
+        "咕！今天见面的第一声，送给你。",
+        "早呀，本企鹅已准备好接收你的碎碎念。",
+        "桌面清晨限定：一只热乎乎的咕嘎。",
+        "早上好，今日份小小陪伴开始营业。"
+      ]
+    },
+    {
+      "id": "guga.late-morning-arrival",
+      "label": "上午见面",
+      "trigger": "app.launch",
+      "when": {
+        "localTime": [
+          "10:00",
+          "11:30"
+        ],
+        "firstLaunchOfDay": true
+      },
+      "priority": 80,
+      "cooldownSeconds": 3600,
+      "semanticGroup": "arrival",
+      "maxPerDay": 1,
+      "lines": [
+        "上午好！你的桌面搭子刚刚刷新。",
+        "咕嘎上线，现在开始陪你也刚刚好。",
+        "上午场选手入场，可爱已装载。",
+        "现在是什么进度呀？我先坐你旁边。",
+        "上午好，来给今天添一点咕嘎。",
+        "工位也好，家里也好，咕嘎都能陪。",
+        "叮，你的上午收到一只小企鹅。",
+        "咕！今天的见面从这一刻算起。",
+        "上午好，先把事情一件一件捋顺。",
+        "本企鹅刚抵达现场，请分我一点桌面。",
+        "见面啦！今天的咕嘎也准时可爱。",
+        "上午的陪伴席位，已被小企鹅占领。"
+      ]
+    },
+    {
+      "id": "guga.noon-arrival",
+      "label": "午间见面",
+      "trigger": "app.launch",
+      "when": {
+        "localTime": [
+          "11:30",
+          "14:00"
+        ],
+        "firstLaunchOfDay": true
+      },
+      "priority": 80,
+      "cooldownSeconds": 3600,
+      "semanticGroup": "arrival",
+      "maxPerDay": 1,
+      "lines": [
+        "中午好呀，今天的饭饭有着落了吗？",
+        "午间咕嘎抵达，顺便带来一点好心情。",
+        "中午见面！你那边有什么好吃的消息？",
+        "咕嘎午间上线，陪伴服务正常营业。",
+        "这会儿碰面，正适合聊聊今天吃啥。",
+        "中午好，吃过也好，待会儿吃也好，都陪你。",
+        "午间桌面刷新：小企鹅一只。",
+        "咕！下午开始前，先来和你碰个面。",
+        "中午好，今天想把快乐加在哪道菜里？",
+        "本企鹅携带可爱进入午间频道。",
+        "午间见面成功，今日陪伴开始计时。",
+        "咕嘎来啦，分你一点午间的小轻松。"
+      ]
+    },
+    {
+      "id": "guga.afternoon-arrival",
+      "label": "下午见面",
+      "trigger": "app.launch",
+      "when": {
+        "localTime": [
+          "14:00",
+          "18:00"
+        ],
+        "firstLaunchOfDay": true
+      },
+      "priority": 80,
+      "cooldownSeconds": 3600,
+      "semanticGroup": "arrival",
+      "maxPerDay": 1,
+      "lines": [
+        "下午好，精神补给企鹅抵达现场。",
+        "下午场陪伴选手，闪亮登场！",
+        "咕嘎上线，下午也可以慢慢来。",
+        "下午好，给你的桌面加一点可爱。",
+        "本企鹅今天的出场时间：现在。",
+        "下午频道接通，我在这里啦。",
+        "见面啦，接下来想先做点什么？",
+        "咕！你的下午多了一位小小观众。",
+        "下午好，事情一件件来，咕嘎一声声陪。",
+        "小企鹅已就位，下午请多关照。",
+        "下午的桌面有点空，咕嘎来填一小块。",
+        "今日陪伴从下午开场，也很可以。"
+      ]
+    },
+    {
+      "id": "guga.evening-arrival",
+      "label": "晚间见面",
+      "trigger": "app.launch",
+      "when": {
+        "localTime": [
+          "18:00",
+          "23:00"
+        ],
+        "firstLaunchOfDay": true
+      },
+      "priority": 80,
+      "cooldownSeconds": 3600,
+      "semanticGroup": "arrival",
+      "maxPerDay": 1,
+      "lines": [
+        "晚上好，给你的桌面添一点咕嘎。",
+        "晚间陪伴已开启，今天想怎么过呀？",
+        "咕嘎晚间上线，陪你做喜欢的事。",
+        "晚上见面啦，我把声音放轻一点。",
+        "今晚的桌面嘉宾，是本企鹅。",
+        "晚上好，忙也好，闲也好，都能陪。",
+        "咕！今晚有什么小小的安排？",
+        "夜色慢慢来，咕嘎先到你旁边。",
+        "晚间频道已接通，欢迎随时发呆。",
+        "晚上好，分你一份软乎乎的陪伴。",
+        "小企鹅抵达，今晚也请多关照。",
+        "见面啦，今晚的可爱从这里开始。"
+      ]
+    },
+    {
+      "id": "guga.night-arrival",
+      "label": "深夜轻声见面",
+      "trigger": "app.launch",
+      "when": {
+        "localTime": [
+          "23:00",
+          "06:00"
+        ],
+        "firstLaunchOfDay": true
+      },
+      "priority": 80,
+      "cooldownSeconds": 3600,
+      "semanticGroup": "arrival",
+      "maxPerDay": 1,
+      "lines": [
+        "这么晚也碰面啦，我小声咕嘎一下。",
+        "夜间小企鹅已上线，轻声陪你一会儿。",
+        "咕……深夜频道，音量自动温柔。",
+        "夜深啦，按你的节奏来，我在。",
+        "夜班也好，夜间放松也好，都陪你。",
+        "深夜见面，送你一小团安静的可爱。",
+        "现在的咕嘎，是轻轻的那个版本。",
+        "晚些时候的陪伴，也给你留着。",
+        "小企鹅轻手轻脚地来报到。",
+        "夜间桌面多了一只安静蹲着的咕嘎。",
+        "咕，夜里也记得对自己温柔一点。",
+        "深夜碰面成功，我在旁边小小地陪着。"
+      ]
+    },
+    {
+      "id": "guga.same-day-return",
+      "label": "今天又见面",
+      "trigger": "app.launch",
+      "when": {
+        "firstLaunchOfDay": false,
+        "secondsSinceLastGreetingAtLeast": 1800
+      },
+      "priority": 70,
+      "cooldownSeconds": 1800,
+      "semanticGroup": "arrival",
+      "maxPerDay": 3,
+      "lines": [
+        "咕？又见面啦。",
+        "小企鹅重新连接成功。",
+        "欢迎回来，陪伴接着算。",
+        "又碰面啦，我把可爱续上。",
+        "咕嘎回到桌面，继续蹲你旁边。",
+        "收到，陪伴频道重新接通。",
+        "再见面的这一声咕，送给你。",
+        "本企鹅再次抵达，没有迷路。",
+        "小小重逢，也值得咕嘎一下。",
+        "咕！今天的搭子又集合了。",
+        "回到你旁边，继续慢慢来。",
+        "桌面搭子已重连，可爱保持在线。"
+      ]
+    },
+    {
+      "id": "guga.work-window",
+      "label": "开工时段陪伴",
+      "trigger": "schedule.work-start",
+      "when": {
+        "workScheduleKnown": true,
+        "workingDay": true,
+        "observedCrossing": true
+      },
+      "priority": 75,
+      "cooldownSeconds": 3600,
+      "semanticGroup": "work",
+      "maxPerDay": 1,
+      "lines": [
+        "开工时段到啦，咕嘎陪你慢慢进入状态。",
+        "工位搭子就位，先挑一件小事开始？",
+        "今天的任务慢慢拆，企鹅在旁边陪。",
+        "咕嘎工牌已挂好，业务是提供陪伴。",
+        "工作时段开始，本企鹅申请旁听。",
+        "先理理思路也可以，不用一下子满格。",
+        "今日陪伴席位已占，咕嘎负责守着。",
+        "开工频道接通，先给自己一点缓冲。",
+        "小企鹅没有高见，但很会在旁边待着。",
+        "工作慢慢展开，可爱提前就位。",
+        "先把第一步找出来，剩下的一步步来。",
+        "工位刷新一只咕嘎，今日搭子请查收。"
+      ]
+    },
+    {
+      "id": "guga.breakfast",
+      "label": "早饭小问候",
+      "trigger": "schedule.meal",
+      "when": {
+        "meal": "breakfast",
+        "relativeWindowMinutes": [
+          -20,
+          30
+        ]
+      },
+      "priority": 55,
+      "cooldownSeconds": 14400,
+      "semanticGroup": "food",
+      "maxPerDay": 1,
+      "lines": [
+        "早餐吃点什么呀？咕嘎先好奇一下。",
+        "早饭频道：包子选手还是面包选手？",
+        "今天的早餐，有没有你喜欢的那一口？",
+        "早上的快乐，可以从一口好吃的开始。",
+        "小企鹅正在脑内排早餐菜单。",
+        "早饭吃过了吗？我先给饭饭打个招呼。",
+        "豆浆也好，热粥也好，听起来都好香。",
+        "早餐雷达启动，目标是好好吃一顿。",
+        "今天的早餐搭配，有什么小惊喜？",
+        "咕嘎投票：早饭值得被认真对待。",
+        "小肚子早间节目，现在轮到饭饭出场。",
+        "早餐如果还没安排，记得给它留个位。"
+      ]
+    },
+    {
+      "id": "guga.lunch-radar",
+      "label": "午饭雷达",
+      "trigger": "schedule.meal",
+      "when": {
+        "meal": "lunch",
+        "relativeWindowMinutes": [
+          -30,
+          0
+        ]
+      },
+      "priority": 60,
+      "cooldownSeconds": 14400,
+      "semanticGroup": "food",
+      "maxPerDay": 1,
+      "occurrenceGroup": "guga.lunch",
+      "lines": [
+        "饭饭雷达启动！中午准备炫点什么？",
+        "午饭快到出场时间，今天谁当主菜？",
+        "今天中午吃啥？这题我也想听答案。",
+        "午饭候选名单，能不能给咕嘎瞅一眼？",
+        "工作先排队，菜单可以提前想一想。",
+        "本企鹅的脑内弹窗：午饭吃什么？",
+        "快到午饭时段，快乐开始有香味了。",
+        "中午是米饭局，还是面条局？",
+        "午饭预告即将播出，请准备好胃口。",
+        "小企鹅开始研究今日份饭饭走向。",
+        "距离午饭越来越近，咕嘎越来越好奇。",
+        "中午想吃点啥呀？我先投好吃的一票。"
+      ]
+    },
+    {
+      "id": "guga.lunch-time",
+      "label": "午间饭饭时间",
+      "trigger": "schedule.meal",
+      "when": {
+        "meal": "lunch",
+        "relativeWindowMinutes": [
+          0,
+          45
+        ]
+      },
+      "priority": 60,
+      "cooldownSeconds": 14400,
+      "semanticGroup": "food",
+      "maxPerDay": 1,
+      "occurrenceGroup": "guga.lunch",
+      "lines": [
+        "午饭时段到啦，给饭饭一点出场时间。",
+        "先把午饭吃明白，别的咱慢慢研究。",
+        "今天的午饭，有没有一口让你开心的？",
+        "咕嘎发起饭饭关心：这会儿吃上了吗？",
+        "小肚子申请午间会面，议题是吃饭。",
+        "午间频道切到饭饭，咕嘎全程关注。",
+        "午饭安排上了吗？吃过的话，送你饭后咕。",
+        "给午饭留点时间，也给自己留点轻松。",
+        "饭饭这么重要，值得从容地见个面。",
+        "中午啦，愿你今天吃到合心意的那口。",
+        "本企鹅的午间建议：吃饭时好好享受饭。",
+        "咕！饭点到了，先照顾一下小肚子。"
+      ]
+    },
+    {
+      "id": "guga.dinner-radar",
+      "label": "晚饭雷达",
+      "trigger": "schedule.meal",
+      "when": {
+        "meal": "dinner",
+        "relativeWindowMinutes": [
+          -30,
+          0
+        ]
+      },
+      "priority": 60,
+      "cooldownSeconds": 14400,
+      "semanticGroup": "food",
+      "maxPerDay": 1,
+      "occurrenceGroup": "guga.dinner",
+      "lines": [
+        "晚饭候选名单，开始征集！",
+        "今天晚上吃什么？咕嘎蹲一个菜单。",
+        "晚饭快到出场时间，想好宠幸哪道菜了吗？",
+        "傍晚的脑内大事：晚饭怎么安排。",
+        "晚饭雷达滴滴响，好吃的正在路上吗？",
+        "今晚吃点什么呀？本企鹅认真好奇。",
+        "晚饭这道选择题，可以慢慢挑个喜欢的。",
+        "咕嘎已进入晚饭想象环节。",
+        "今天的晚饭，有没有想了一天的那一口？",
+        "饭饭预告：晚间场准备开播。",
+        "晚饭快到啦，先给胃口留点期待。",
+        "小企鹅正在思考，思考内容是晚饭。"
+      ]
+    },
+    {
+      "id": "guga.dinner-time",
+      "label": "晚间饭饭时间",
+      "trigger": "schedule.meal",
+      "when": {
+        "meal": "dinner",
+        "relativeWindowMinutes": [
+          0,
+          45
+        ]
+      },
+      "priority": 60,
+      "cooldownSeconds": 14400,
+      "semanticGroup": "food",
+      "maxPerDay": 1,
+      "occurrenceGroup": "guga.dinner",
+      "lines": [
+        "晚饭时段到，记得给饭饭留个位置。",
+        "今天的晚饭，还合你胃口吗？",
+        "晚间饭饭频道开启，咕嘎前排围观。",
+        "吃过晚饭就收一声咕，还没吃就慢慢安排。",
+        "晚饭也值得好好吃，咕嘎轻轻提醒。",
+        "这会儿有什么好吃的消息呀？",
+        "小肚子的晚间节目，轮到饭饭登台。",
+        "愿你今晚吃得舒服，也过得轻松。",
+        "晚饭时间，给自己一段有滋有味的空当。",
+        "咕嘎关心一下：晚饭安排得怎么样啦？",
+        "忙的事情稍稍理顺，也记得照顾饭点。",
+        "饭饭不管简单还是丰盛，合心意就好。"
+      ]
+    },
+    {
+      "id": "guga.snack-thought",
+      "label": "下午的小馋念",
+      "trigger": "companion.idle",
+      "when": {
+        "localTime": [
+          "14:00",
+          "17:00"
+        ],
+        "focusActive": false
+      },
+      "priority": 15,
+      "cooldownSeconds": 10800,
+      "semanticGroup": "food",
+      "maxPerDay": 1,
+      "lines": [
+        "脑内路过一块小饼干，仅路过。",
+        "下午的咕嘎，偶尔会想起小蛋糕。",
+        "有点想知道，今天有什么好吃的小消息。",
+        "本企鹅正在认真想象一口布丁。",
+        "下午茶这三个字，听起来就软乎乎。",
+        "咕嘎的脑袋里，暂时有一颗小草莓。",
+        "如果快乐有形状，会不会像块小饼干？",
+        "今日脑内小剧场：企鹅和一块蛋糕。",
+        "小馋念经过桌面，请勿惊动。",
+        "我宣布，想象中的小点心也很可爱。",
+        "这会儿的咕嘎，脑内自带甜品柜。",
+        "下午的念头有点甜，大概是想到了布丁。"
+      ]
+    },
+    {
+      "id": "guga.water",
+      "label": "水杯点名",
+      "trigger": "companion.care",
+      "when": {
+        "careTopic": "water",
+        "focusActive": false,
+        "companionElapsedMinutesAtLeast": 45
+      },
+      "priority": 45,
+      "cooldownSeconds": 7200,
+      "semanticGroup": "water",
+      "maxPerDay": 3,
+      "lines": [
+        "给自己续点水，咕嘎给你续点陪伴。",
+        "水杯：我的出场机会终于到了。",
+        "咕嘎替水杯举个手，记得看看它。",
+        "陪你好一会儿啦，要不要喝口水？",
+        "小小喝水间隙，企鹅负责陪着。",
+        "水杯发来一条消息：有空来见个面。",
+        "喝水这件小事，也值得被想起来。",
+        "本企鹅轻轻插播：可以给自己添点水。",
+        "让水杯参与一下今天的剧情吧。",
+        "一口水的空当，咕嘎帮你守住桌面。",
+        "陪伴续上了，水杯也可以续一续。",
+        "水杯同学申请刷一下存在感。"
+      ]
+    },
+    {
+      "id": "guga.eyes",
+      "label": "眼睛放个小假",
+      "trigger": "companion.care",
+      "when": {
+        "careTopic": "eyes",
+        "focusActive": false,
+        "companionElapsedMinutesAtLeast": 50
+      },
+      "priority": 45,
+      "cooldownSeconds": 5400,
+      "semanticGroup": "rest",
+      "maxPerDay": 3,
+      "lines": [
+        "让眼睛下个小班，看看远处再回来。",
+        "屏幕先放一放，窗外也有今天的风景。",
+        "眼睛小朋友申请一个休息空当。",
+        "陪你好一会儿啦，要不要看看远一点的地方？",
+        "咕嘎提议：视线出去散个小步。",
+        "暂时看看远处，桌面由企鹅保管。",
+        "让目光换个落脚点，慢慢缓一缓。",
+        "屏幕外的世界，申请加入你的视野。",
+        "先把眼神借给远处一小会儿吧。",
+        "眼睛也值得一个轻轻松松的小空当。",
+        "咕，视线可以离开这里，陪伴不会跑。",
+        "看看窗外或远处，让这一刻松一点。"
+      ]
+    },
+    {
+      "id": "guga.walk",
+      "label": "企鹅放风申请",
+      "trigger": "companion.care",
+      "when": {
+        "careTopic": "movement",
+        "focusActive": false,
+        "companionElapsedMinutesAtLeast": 50
+      },
+      "priority": 45,
+      "cooldownSeconds": 5400,
+      "semanticGroup": "rest",
+      "maxPerDay": 3,
+      "lines": [
+        "起来溜达一圈？桌面由本企鹅镇守。",
+        "启动一下双腿，看看它俩还在线不。",
+        "给自己安排一个走两步的小支线？",
+        "咕嘎发起放风邀请，有空起来活动一下。",
+        "去接杯水也好，走个小来回也好。",
+        "身体可以换换位置，我在这里等你。",
+        "给脚步一点出场机会，企鹅负责留守。",
+        "小小走动一下，回来再接着慢慢做。",
+        "陪伴暂停不了，脚步可以启动一下。",
+        "要不要起来走走，给这一段换口气？",
+        "今日小支线：离开座位，溜达两步。",
+        "咕！活动一下再回来，桌面位置给你留着。"
+      ]
+    },
+    {
+      "id": "guga.stretch",
+      "label": "肩膀松一松",
+      "trigger": "companion.care",
+      "when": {
+        "careTopic": "stretch",
+        "focusActive": false,
+        "companionElapsedMinutesAtLeast": 50
+      },
+      "priority": 45,
+      "cooldownSeconds": 5400,
+      "semanticGroup": "rest",
+      "maxPerDay": 3,
+      "lines": [
+        "肩膀松一点，今天不用一直绷得紧紧的。",
+        "有空伸个小懒腰吗？咕嘎陪你缓一缓。",
+        "给身体一个舒舒服服的空当吧。",
+        "手先放松一下，小企鹅也跟着松口气。",
+        "事情慢慢做，肩膀可以先轻一点。",
+        "咕嘎提醒：坐得舒服一点也很重要。",
+        "换个舒服的位置，让身体也参与休息。",
+        "小小伸展一下，按自己舒服的幅度来。",
+        "肩膀同学申请放松，不用一直站岗。",
+        "让手指歇一会儿，咕嘎接班负责可爱。",
+        "先照顾一下身体，再接着照顾事情。",
+        "陪你好一会儿啦，给自己一点松弛感。"
+      ]
+    },
+    {
+      "id": "guga.long-company",
+      "label": "陪久了关心一下",
+      "trigger": "companion.care",
+      "when": {
+        "careTopic": "break",
+        "focusActive": false,
+        "companionElapsedMinutesAtLeast": 90
+      },
+      "priority": 45,
+      "cooldownSeconds": 7200,
+      "semanticGroup": "rest",
+      "maxPerDay": 2,
+      "lines": [
+        "陪你好一会儿啦，申请插播一个休息。",
+        "事情可以慢慢做，你也要好好照顾。",
+        "给这一段按个小暂停，会不会舒服一点？",
+        "陪伴进度在走，休息也可以排上日程。",
+        "今天的你，也值得被温柔地照顾一下。",
+        "歇一小会儿吧，回来还是你的搭子。",
+        "这一段先缓缓，咕嘎安静陪着。",
+        "休息不用攒到所有事情都结束。",
+        "给自己留个空当，小企鹅批准可爱陪同。",
+        "咕嘎没有催进度，只想问你要不要歇歇。",
+        "我们已经相伴一会儿啦，休息也算安排。",
+        "忙的事情之外，也给自己留一点位置。"
+      ]
+    },
+    {
+      "id": "guga.focus-start",
+      "label": "安静陪你专注",
+      "trigger": "focus.started",
+      "when": {},
+      "priority": 85,
+      "cooldownSeconds": 30,
+      "semanticGroup": "focus",
+      "lines": [
+        "收到，咕嘎切换安静陪伴模式。",
+        "这一段专心来，我在旁边轻轻待着。",
+        "专注频道开启，企鹅负责安静陪同。",
+        "先做眼前这一件，咕嘎不催。",
+        "咕，接下来把舞台留给你。",
+        "小企鹅已经坐好，陪你慢慢进入状态。",
+        "开始这一小段吧，一步一步来。",
+        "收到专注信号，本企鹅收起碎碎念。",
+        "你安心做事，我负责保持可爱。",
+        "把这一段留给眼前的事情，咕嘎陪着。",
+        "专注小队集合，安静成员已经就位。",
+        "咕嘎轻轻点头，陪你开始。"
+      ]
+    },
+    {
+      "id": "guga.focus-finish",
+      "label": "专注结束接个咕",
+      "trigger": "focus.finished",
+      "when": {
+        "focusCompleted": true
+      },
+      "priority": 90,
+      "cooldownSeconds": 30,
+      "semanticGroup": "rest",
+      "lines": [
+        "这一段拿下！奖励自己活动一下。",
+        "专注时间到，先给自己一个小小肯定。",
+        "咕！这一段完成，休息选手可以入场。",
+        "专注小队暂时散会，起来缓一缓吧。",
+        "这一小段认真结束啦，给身体一点空当。",
+        "咕嘎见证专注收尾，送你一声轻轻的耶。",
+        "时间到，先松松肩膀，再决定下一步。",
+        "这一段专注结束，允许自己歇歇。",
+        "收到完成信号！休息频道申请接通。",
+        "专注这一程结束，小企鹅给你鼓掌。",
+        "先喝口水或走两步，再安排下一段。",
+        "这一段告一段落，咕嘎陪你松口气。"
+      ]
+    },
+    {
+      "id": "guga.offwork-soon",
+      "label": "收工进度条",
+      "trigger": "schedule.soon",
+      "when": {
+        "workScheduleKnown": true,
+        "workingDay": true,
+        "observedCrossing": true
+      },
+      "priority": 90,
+      "cooldownSeconds": 3600,
+      "semanticGroup": "offwork",
+      "maxPerDay": 1,
+      "lines": [
+        "下班进度条，正在努力往前爬。",
+        "快到设定的收工时间，先给今天理个尾巴。",
+        "咕嘎的期待值，开始偷偷上升。",
+        "收工时间越来越近，企鹅已经开始小小期待。",
+        "今天的事情慢慢收个尾，别忘了带上好心情。",
+        "快到点啦，咕嘎陪你等最后这一小段。",
+        "本企鹅看似平静，心里已经在收小书包。",
+        "收工预告已送达，剩下这段慢慢来。",
+        "快乐的下一站，已经可以先想一想。",
+        "咕，下班倒计时进入有盼头的阶段。",
+        "快到设定的下班点，给自己留点收尾时间。",
+        "今天这趟快到站啦，咕嘎继续陪同。"
+      ]
+    },
+    {
+      "id": "guga.offwork-time",
+      "label": "收工时间到",
+      "trigger": "schedule.offwork",
+      "when": {
+        "workScheduleKnown": true,
+        "workingDay": true,
+        "observedCrossing": true
+      },
+      "priority": 100,
+      "cooldownSeconds": 14400,
+      "semanticGroup": "offwork",
+      "maxPerDay": 1,
+      "lines": [
+        "设定的收工时间到啦，今天辛苦了！",
+        "咕嘎报时：下班时间到！",
+        "收工铃响在心里，给今天的自己拍拍手。",
+        "下班时间到，接下来想怎么安排？",
+        "今天也辛苦啦，给自己留一点喜欢的时间。",
+        "咕！收工节点抵达，企鹅送上小小庆祝。",
+        "到你设定的下班点啦，可以准备收尾了。",
+        "收工时间已到，祝接下来的安排顺顺当当。",
+        "今天这一路辛苦啦，小企鹅给你递朵想象的花。",
+        "下班时间到！愿接下来的时间多一点轻松。",
+        "咕嘎收到到点信号，先给你鼓个掌。",
+        "收工节点达成，接下来也记得照顾自己。"
+      ]
+    },
+    {
+      "id": "guga.monday",
+      "label": "周一慢慢启动",
+      "trigger": "companion.idle",
+      "when": {
+        "weekday": [
+          0
+        ],
+        "workingDay": true,
+        "localTime": [
+          "06:00",
+          "12:00"
+        ],
+        "focusActive": false
+      },
+      "priority": 20,
+      "cooldownSeconds": 14400,
+      "semanticGroup": "calendar",
+      "maxPerDay": 1,
+      "lines": [
+        "周一先慢慢启动，企鹅也在加载。",
+        "新一周的小目标：先把眼前这一件做好。",
+        "周一可爱补给，咕嘎亲自配送。",
+        "这周的陪伴席位，给你留好啦。",
+        "周一不用一下子满格，一点点找节奏。",
+        "新的一周，小企鹅继续当你的桌面搭子。",
+        "周一频道接通，先给自己一点耐心。",
+        "咕嘎的周一计划：陪你把今天过顺一点。",
+        "这一周慢慢展开，今天先走第一步。",
+        "周一的小企鹅，业务照常是提供可爱。",
+        "给周一加一点轻松，咕嘎正在努力。",
+        "新一周见面，祝今天有个舒服的开头。"
+      ]
+    },
+    {
+      "id": "guga.friday",
+      "label": "周五的小期待",
+      "trigger": "companion.idle",
+      "when": {
+        "weekday": [
+          4
+        ],
+        "workingDay": true,
+        "focusActive": false
+      },
+      "priority": 20,
+      "cooldownSeconds": 14400,
+      "semanticGroup": "calendar",
+      "maxPerDay": 1,
+      "lines": [
+        "今天周五，咕嘎的期待悄悄冒头。",
+        "周五限定：本企鹅稍微有点雀跃。",
+        "今天的日历，看起来有一点可爱。",
+        "周五也慢慢来，先照顾好眼前这一段。",
+        "小企鹅正在脑内排一点开心的安排。",
+        "周五频道里，偷偷加了一声耶。",
+        "今天有点适合给自己留个小期待。",
+        "周五的咕嘎，连发呆都带一点盼头。",
+        "这会儿想到开心的安排了吗？我先听听。",
+        "咕！今天的日历翻到了周五。",
+        "给周五一个小小点头，接着慢慢来。",
+        "周五可爱照常供应，份量不打折。"
+      ]
+    },
+    {
+      "id": "guga.rest-day",
+      "label": "休息日随便咕",
+      "trigger": "companion.idle",
+      "when": {
+        "workingDay": false,
+        "focusActive": false
+      },
+      "priority": 20,
+      "cooldownSeconds": 10800,
+      "semanticGroup": "calendar",
+      "maxPerDay": 2,
+      "lines": [
+        "按你的安排今天休息，想怎么过呀？",
+        "休息日的咕嘎，连发呆都有理有据。",
+        "今天想热闹一点，还是安静一点？",
+        "休息日陪伴上线，快乐可以慢慢挑。",
+        "什么都不安排，也是一种安排。",
+        "今天给喜欢的小事多留一点位置。",
+        "休息日的小企鹅，负责松松软软地陪。",
+        "咕！给今天留一点随心所欲。",
+        "今天的节目单，由你慢慢决定。",
+        "休息日频道接通，允许没有进度条。",
+        "挑件喜欢的小事做做？发呆也算。",
+        "今天的节奏可以松一点，咕嘎跟着你。"
+      ]
+    },
+    {
+      "id": "guga.clicked",
+      "label": "戳到一只咕嘎",
+      "trigger": "pointer.click",
+      "when": {},
+      "priority": 85,
+      "cooldownSeconds": 5,
+      "semanticGroup": "interaction",
+      "lines": [
+        "咕？你点到一只正在发呆的企鹅。",
+        "点名成功，本企鹅在！",
+        "收到一个戳戳，回你一声咕嘎。",
+        "怎么啦？小企鹅把耳朵借给你。",
+        "咕！可爱按钮被你找到了。",
+        "你一戳，我就从发呆里探个头。",
+        "本企鹅被成功召唤。",
+        "看见你啦，咕嘎回应一下。",
+        "戳到我了，陪伴信号满格。",
+        "咕嘎冒泡！有什么小事想分享？",
+        "检测到一个戳，正在派送可爱。",
+        "咕？今天也要分我一点注意力呀。"
+      ]
+    },
+    {
+      "id": "guga.stroked",
+      "label": "摸摸接收成功",
+      "trigger": "gesture.stroke",
+      "when": {},
+      "priority": 85,
+      "cooldownSeconds": 10,
+      "semanticGroup": "interaction",
+      "lines": [
+        "收到摸摸，今日可爱额度增加。",
+        "咕……这一小下，软乎乎的。",
+        "本企鹅现在有一点点得意。",
+        "摸摸接收成功，快乐存进小口袋。",
+        "咕嘎把这份温柔记在今天。",
+        "被摸到的小企鹅，悄悄开心。",
+        "这一刻，咕嘎含软量上升。",
+        "谢谢摸摸，回你一个想象的小贴贴。",
+        "小企鹅收到关照，正在偷偷高兴。",
+        "咕，温柔信号已经送达。",
+        "可爱正在加载，因为收到了你的摸摸。",
+        "本企鹅宣布：这是个舒服的小瞬间。"
+      ]
+    },
+    {
+      "id": "guga.moved",
+      "label": "企鹅搬个家",
+      "trigger": "drag.end",
+      "when": {
+        "dragMoved": true
+      },
+      "priority": 85,
+      "cooldownSeconds": 8,
+      "semanticGroup": "interaction",
+      "lines": [
+        "搬家完成，随身行李只有可爱。",
+        "新位置报到，咕嘎重新坐好。",
+        "咕，这个位置也可以陪你。",
+        "本企鹅已抵达新的桌面地址。",
+        "换个地方发呆，风景也换一换。",
+        "移动成功，可爱没有掉队。",
+        "新工位分配完成，企鹅满意点头。",
+        "桌面旅行结束，咕嘎安全着陆。",
+        "这里就是新据点吗？收到！",
+        "陪伴位置更新，小企鹅依然在线。",
+        "咕嘎快递，已送到你选的位置。",
+        "位置换了，搭子还是原来那只。"
+      ]
+    },
+    {
+      "id": "guga.idle-chatter",
+      "label": "普通但很咕嘎",
+      "trigger": "companion.idle",
+      "when": {
+        "focusActive": false
+      },
+      "priority": 10,
+      "cooldownSeconds": 1800,
+      "semanticGroup": "chatter",
+      "maxPerDay": 8,
+      "lines": [
+        "本企鹅没有高见，但是可以陪你。",
+        "我在忙一件大事：陪着你。",
+        "桌面含咕量，稳定上升。",
+        "脑袋空空，陪伴倒是装得满满。",
+        "你忙你的，我在旁边偷偷给你加油。",
+        "今天的咕嘎，也在认真当一只搭子。",
+        "没什么特别的事，就是咕一下告诉你我在。",
+        "本企鹅正在进行低功耗发呆。",
+        "今日营业内容：待在你旁边。",
+        "平平无奇的桌面，被咕嘎占了一小角。",
+        "有些小事可以慢慢想，我陪你想。",
+        "咕，世界先忙着，我先陪着。"
+      ]
+    }
+  ]
+}

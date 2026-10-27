@@ -78,6 +78,12 @@ $deploymentCredential.GetNetworkCredential().Password | python tools/deploy.py -
 
 工具会记录源码提交、服务器发布目录和备份目录到本机 `outputs/last-deployment.json`。真正部署后还应从外网检查网站页面、实际角色下载、更新包，以及搭子接口。部署工具针对当前服务器配置；换服务器前应重新检查路由与系统环境。
 
+## 角色台词
+
+`/dialogues` 提供场景试读和 `.petdialogue` 下载，角色详情只显示对应角色的包。文字包按 `characterId` 绑定，不要求各角色使用相同场景。目前附带咕嘎日常，30 个场景、360 句文字，不包含声音或用户自定义。
+
+发布者将通过客户端完整校验的台词包放入 `static/dialogue-packs/`，随网站源码发布。只读接口为 `GET /api/catalog/dialogues`、`GET /api/catalog/characters/{id}/dialogues`、`GET /api/catalog/dialogues/{id}/download`；没有公开上传或管理入口。
+
 ## 验证
 
 ```powershell

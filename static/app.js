@@ -1,5 +1,7 @@
+import { dialogueSection, bindDialogues } from './dialogues.js?v=0.6.0-preview.4';
+
 const main = document.querySelector('main');
-const state = { characters: [], releases: [], tags: [] };
+const state = { characters: [], releases: [], tags: [], dialogues: [] };
 const e = (value = '') => String(value).replace(/[&<>"']/g, char => ({'&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#39;'}[char]));
 const mb = bytes => `${(bytes / 1024 / 1024).toFixed(1)} MB`;
 const date = value => new Date(value).toLocaleDateString('zh-CN', { year: 'numeric', month: '2-digit', day: '2-digit' });
@@ -44,7 +46,7 @@ function home() {
   return `<section class="hero"><div class="hero-copy"><div class="eyebrow"><span class="live-dot"></span> 给桌面添一点陪伴</div><h1>陪你认真摸鱼，<br>也陪你<span class="highlight">准时下班。</span></h1><p class="hero-description">一个住在桌面上的小小伙伴。<br>会回应你的互动，也会陪你把平凡的一天过得有趣一点。</p><div class="hero-actions"><a class="button primary" href="/download"><span class="windows-icon" aria-hidden="true">▦</span> 下载 Windows 版 <span>↓</span></a><a class="button outline" href="/characters">找一个小搭子 <span>→</span></a></div><p class="download-meta">${release ? `v${e(release.version)} · ${mb(release.size)} · ${release.channel === 'preview' ? '预览版' : '正式版'}` : '适用于 Windows · 下载后完整解压运行'}</p><div class="hero-note"><span class="tiny-avatars">${featured().slice(0, 3).map(item => `<img src="${e(item.thumbnail_url)}" alt="">`).join('')}</span><span>不同性格，同样陪伴。<br><strong>找到属于你的那一只。</strong></span></div></div>${heroScene()}</section>
     <div class="value-strip"><span><b>01</b> 无需注册，即刻相伴</span><span><b>02</b> 角色独立下载，自由切换</span><span><b>03</b> 装进口袋，离线也能陪你</span><img src="/static/flower.svg" width="24" height="24" alt=""></div>
     <section class="section discover"><div class="section-heading"><div><p class="eyebrow">MEET YOUR LITTLE PAL</p><h2>今天，想和谁一起下班？</h2><p>每一只都有自己的小脾气，点开看看它的拿手动作。</p></div><a class="text-link" href="/characters">探索全部角色 <span>↗</span></a></div><div class="character-grid">${featured().slice(0, 3).map(card).join('') || empty('第一批小搭子正在准备中。')}</div></section>
-    <section class="about-banner"><div class="about-number">小小一只，<br><em>陪伴很多。</em></div><div class="about-copy"><p>从桌面的一角，到下班的那一刻。</p><span>摸摸头、打个招呼，或是和远方的搭子互相打气。<br>你可以随时换个角色，也可以制作属于自己的小伙伴。</span><a class="text-link" href="/guide">三步开始你的桌面陪伴 <span>→</span></a></div><span class="banner-daisy">✳</span></section>`;
+    <section class="about-banner"><div class="about-number">小小一只，<br><em>陪伴很多。</em></div><div class="about-copy"><p>从桌面的一角，到下班的那一刻。</p><span>摸摸头、打个招呼，或是和远方的搭子互相打气。<br>你可以随时换个角色，也可以制作属于自己的小伙伴。</span><a class="text-link" href="/guide">三步开始你的桌面陪伴 <span>→</span></a><br><a class="text-link" href="/dialogues">新上线：试读角色的可爱碎碎念 <span>→</span></a></div><span class="banner-daisy">✳</span></section>`;
 }
 
 function empty(message) { return `<div class="empty-state"><span>✳</span><h3>${e(message)}</h3><p>试试其他关键词，或稍后再来看看。</p></div>`; }
@@ -94,14 +96,15 @@ function guide() {
     ['一定要联网才能用吗？', '不用。已安装的角色、本地互动和倒计时可以离线使用。下载新角色、检查更新和搭子远程互动需要联网。'],
     ['怎么下载和更新角色？', '在角色详情页下载 .petpack 文件，然后在桌宠的“换角色”界面导入。更新角色时导入同一角色的新版本即可。网页暂未接入直接唤起客户端安装。'],
     ['软件怎么更新？', '在托盘菜单或设置中点击“检查更新”。发现新版后，由你点击“更新并重启”；程序也支持后台检查新版本。软件更新与角色包更新分别进行。'],
+    ['角色台词包怎么用？', '升级至 v0.6.0-preview.4 或更新版本，打开“换角色”，选择角色后进入“角色台词”，即可选择、导入或关闭。咕嘎日常已随新版附带 30 个场景、360 句文字；也可在本站试读和下载。台词包按角色绑定，目前不提供用户自定义或声音播放。'],
     ['为什么不同角色的动作不一样？', '外观、动作和互动由角色包定义。详情页展示的是这个包实际提供的菜单动作，不是每个角色都支持相同能力。'],
     ['能制作自己的角色吗？', '可以。当前桌宠已有基础可视化角色制作室，可打开已有角色包继续编辑，配置动作与规则并导出。素材需要自行准备，工具不会自动补画动画。'],
     ['角色素材可以随意再发布吗？', '请查看角色详情中的作者、来源和授权说明。程序代码的许可不自动适用于角色素材，使用和再发布应遵循各自的授权。']
   ].map(([q, a]) => `<details><summary>${e(q)}<span>+</span></summary><p>${e(a)}</p></details>`).join('')}</section>`;
 }
 
-function detail(item, versions) {
-  return `<section class="detail section"><a class="back-link" href="/characters">← 返回角色资源库</a><div class="detail-grid"><div class="detail-stage tone-0"><span class="scene-label">每个小动作，都是一点回应。</span><img id="action-preview" src="${e(item.preview_url)}" alt="${e(item.name)}动态预览"><div class="preview-caption" id="preview-caption">日常陪伴</div></div><div class="detail-info"><p class="eyebrow">YOUR NEXT LITTLE PAL</p><h1>${e(item.name)}</h1><p class="detail-author">BY ${e(item.author)} <span>·</span> v${e(item.version)}</p><p class="detail-description">${e(item.description)}</p><div class="tag-row">${item.tags.map(badge).join('')}</div><a class="button primary" href="${e(item.download_url)}" download>下载角色包 <span>↓</span></a><span class="download-meta">${mb(item.size)} · .petpack · 格式 v${item.format_version}</span><div class="install-note"><strong>带回桌面的方式</strong><p>下载后，在桌宠中打开“换角色 → 导入角色包”。<br>本页预览包内动画，实际互动请在桌宠中体验。</p></div><a class="text-link" href="/guide">第一次使用？看看这份指南 →</a></div></div><div class="detail-lower"><section><h2>看看它的拿手动作。</h2><p class="muted">点击切换动画预览，动作来自当前角色包。</p><div class="action-buttons"><button class="chip active" data-preview="${e(item.preview_url)}" data-label="日常陪伴">日常陪伴</button>${item.actions.map(action => `<button class="chip" data-preview="${e(action.preview_url)}" data-label="${e(action.label)}">${e(action.label)}</button>`).join('')}</div>${item.interactions.length ? `<h3>还可以和搭子这样互动</h3><div class="tag-row">${item.interactions.map(action => badge(action.label)).join('')}</div>` : ''}<h3>作者与素材来源</h3>${item.credits.length ? item.credits.map(credit => `<div class="credit"><strong>${e(credit.author || item.author)}</strong>${url(credit.source) ? `<a class="text-link" href="${e(url(credit.source))}" target="_blank" rel="noopener noreferrer">查看原始来源 ↗</a>` : ''}<p>${e(credit.license || '暂无授权说明')}</p>${credit.changes ? `<p class="muted">修改说明：${e(credit.changes)}</p>` : ''}</div>`).join('') : `<div class="credit"><strong>${e(item.author)}</strong><p>包内未提供单独的授权说明。</p></div>`}</section><aside class="package-info"><h3>角色包信息</h3><dl><dt>包标识</dt><dd>${e(item.id)}</dd><dt>最新版本</dt><dd>${e(item.version)}</dd><dt>入库时间</dt><dd>${date(item.published_at)}</dd><dt>兼容性</dt><dd>需支持格式 v${item.format_version} 及以下能力的桌宠客户端</dd></dl><details><summary>查看所需能力</summary><ul>${item.requires.map(cap => `<li>${e(cap)}</li>`).join('')}</ul></details><details><summary>文件校验值</summary><p class="checksum">SHA-256<br>${e(item.sha256)}</p></details><h3>版本记录</h3>${versions.map(version => `<div class="version-row"><span>v${e(version.version)}</span><a class="text-link" href="${e(version.download_url)}" download>下载 ↓</a></div>`).join('')}</aside></div></section>`;
+function detail(item, versions, dialogues) {
+  return `<section class="detail section"><a class="back-link" href="/characters">← 返回角色资源库</a><div class="detail-grid"><div class="detail-stage tone-0"><span class="scene-label">每个小动作，都是一点回应。</span><img id="action-preview" src="${e(item.preview_url)}" alt="${e(item.name)}动态预览"><div class="preview-caption" id="preview-caption">日常陪伴</div></div><div class="detail-info"><p class="eyebrow">YOUR NEXT LITTLE PAL</p><h1>${e(item.name)}</h1><p class="detail-author">BY ${e(item.author)} <span>·</span> v${e(item.version)}</p><p class="detail-description">${e(item.description)}</p><div class="tag-row">${item.tags.map(badge).join('')}</div><a class="button primary" href="${e(item.download_url)}" download>下载角色包 <span>↓</span></a><span class="download-meta">${mb(item.size)} · .petpack · 格式 v${item.format_version}</span><div class="install-note"><strong>带回桌面的方式</strong><p>下载后，在桌宠中打开“换角色 → 导入角色包”。<br>本页预览包内动画，实际互动请在桌宠中体验。</p></div><a class="text-link" href="/guide">第一次使用？看看这份指南 →</a></div></div><div class="detail-lower"><section><h2>看看它的拿手动作。</h2><p class="muted">点击切换动画预览，动作来自当前角色包。</p><div class="action-buttons"><button class="chip active" data-preview="${e(item.preview_url)}" data-label="日常陪伴">日常陪伴</button>${item.actions.map(action => `<button class="chip" data-preview="${e(action.preview_url)}" data-label="${e(action.label)}">${e(action.label)}</button>`).join('')}</div>${item.interactions.length ? `<h3>还可以和搭子这样互动</h3><div class="tag-row">${item.interactions.map(action => badge(action.label)).join('')}</div>` : ''}${dialogueSection(dialogues)}<h3>作者与素材来源</h3>${item.credits.length ? item.credits.map(credit => `<div class="credit"><strong>${e(credit.author || item.author)}</strong>${url(credit.source) ? `<a class="text-link" href="${e(url(credit.source))}" target="_blank" rel="noopener noreferrer">查看原始来源 ↗</a>` : ''}<p>${e(credit.license || '暂无授权说明')}</p>${credit.changes ? `<p class="muted">修改说明：${e(credit.changes)}</p>` : ''}</div>`).join('') : `<div class="credit"><strong>${e(item.author)}</strong><p>包内未提供单独的授权说明。</p></div>`}</section><aside class="package-info"><h3>角色包信息</h3><dl><dt>包标识</dt><dd>${e(item.id)}</dd><dt>最新版本</dt><dd>${e(item.version)}</dd><dt>入库时间</dt><dd>${date(item.published_at)}</dd><dt>兼容性</dt><dd>需支持格式 v${item.format_version} 及以下能力的桌宠客户端</dd></dl><details><summary>查看所需能力</summary><ul>${item.requires.map(cap => `<li>${e(cap)}</li>`).join('')}</ul></details><details><summary>文件校验值</summary><p class="checksum">SHA-256<br>${e(item.sha256)}</p></details><h3>版本记录</h3>${versions.map(version => `<div class="version-row"><span>v${e(version.version)}</span><a class="text-link" href="${e(version.download_url)}" download>下载 ↓</a></div>`).join('')}</aside></div></section>`;
 }
 
 function bindPreviews() {
@@ -123,16 +126,18 @@ async function route() {
     if (path.startsWith('/characters/')) {
       main.innerHTML = '<div class="loading"><p>正在和小搭子打招呼…</p></div>';
       const id = encodeURIComponent(decodeURIComponent(path.split('/')[2]));
-      const [item, versions] = await Promise.all([api(`characters/${id}`), api(`characters/${id}/versions`)]);
+      const [item, versions, dialogues] = await Promise.all([api(`characters/${id}`), api(`characters/${id}/versions`), api(`characters/${id}/dialogues`)]);
       if (sequence !== routeSequence) return;
-      main.innerHTML = detail(item, versions.items);
+      main.innerHTML = detail(item, versions.items, dialogues.items);
+      bindDialogues(dialogues.items);
       document.title = `${item.name} · 下班搭子角色库`;
       bindPreviews();
     } else {
       if (sequence !== routeSequence) return;
-      main.innerHTML = path === '/characters' ? library() : path === '/download' ? downloadPage() : path === '/guide' ? guide() : home();
-      document.title = ({'/characters':'角色资源库', '/download':'下载与更新', '/guide':'使用指南'}[path] || '给桌面添一点陪伴') + ' · 下班搭子';
+      main.innerHTML = path === '/characters' ? library() : path === '/download' ? downloadPage() : path === '/guide' ? guide() : path === '/dialogues' ? `<section class="section"><div class="page-intro"><p class="eyebrow">WORDS FROM YOUR LITTLE PAL</p><h1>可爱的话，<br>让它<span class="highlight">换着说。</span></h1><p>台词包绑定角色，场景由各自定义。先选个场景，听听文字里的小脾气。</p></div>${dialogueSection(state.dialogues) || empty('角色台词正在准备中')}</section>` : home();
+      document.title = ({'/characters':'角色资源库', '/download':'下载与更新', '/guide':'使用指南', '/dialogues':'角色台词'}[path] || '给桌面添一点陪伴') + ' · 下班搭子';
       if (path === '/characters') bindLibrary();
+      if (path === '/dialogues') bindDialogues(state.dialogues);
     }
   } catch (error) {
     if (sequence !== routeSequence) return;
@@ -145,7 +150,7 @@ document.addEventListener('click', event => {
   const link = event.target.closest('a[href]');
   if (!link || event.defaultPrevented || event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey || link.target || link.hasAttribute('download')) return;
   const next = new URL(link.href, location.href);
-  if (next.origin !== location.origin || !/^\/(?:characters(?:\/[^/]+)?|download|guide)?$/.test(next.pathname)) return;
+  if (next.origin !== location.origin || !/^\/(?:characters(?:\/[^/]+)?|download|guide|dialogues)?$/.test(next.pathname)) return;
   event.preventDefault();
   history.pushState({}, '', next.pathname + next.search);
   route();
@@ -162,8 +167,8 @@ window.addEventListener('popstate', route);
 
 async function init() {
   try {
-    const [catalog, releases] = await Promise.all([api('characters'), api('releases')]);
-    state.characters = catalog.items; state.tags = catalog.tags; state.releases = releases.items;
+    const [catalog, releases, dialogues] = await Promise.all([api('characters'), api('releases'), api('dialogues')]);
+    state.characters = catalog.items; state.tags = catalog.tags; state.releases = releases.items; state.dialogues = dialogues.items;
     await route();
   } catch (error) {
     main.innerHTML = `<section class="error-page"><h1>暂时没能连上小搭子。</h1><p>${e(error.message)}</p><button class="button primary" id="retry">重新加载</button></section>`;

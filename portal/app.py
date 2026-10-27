@@ -7,6 +7,7 @@ from fastapi.responses import FileResponse
 from fastapi.staticfiles import StaticFiles
 
 from .catalog import Catalog, IDENTIFIER
+from .dialogues import dialogue_items, public
 
 ROOT = Path(__file__).resolve().parents[1]
 
@@ -64,6 +65,25 @@ def create_app(data_dir=None):
     def releases():
         return {'items': catalog.releases()}
 
+    @app.get('/api/catalog/dialogues')
+    def dialogues():
+        return {'items': [public(item) for item in dialogue_items(ROOT / 'static/dialogue-packs', catalog)]}
+
+    @app.get('/api/catalog/characters/{identifier}/dialogues')
+    def character_dialogues(identifier: str):
+        if not catalog.character(identifier):
+            raise HTTPException(404, '角色不存在')
+        return {'items': [public(item) for item in dialogue_items(ROOT / 'static/dialogue-packs', catalog)
+                          if item['characterId'] == identifier]}
+
+    @app.get('/api/catalog/dialogues/{identifier}/download')
+    def dialogue_download(identifier: str):
+        item = next((item for item in dialogue_items(ROOT / 'static/dialogue-packs', catalog) if item['id'] == identifier), None)
+        if not item:
+            raise HTTPException(404, '台词包不存在')
+        return FileResponse(item['_path'], filename=f"{item['id']}-{item['version']}.petdialogue",
+                            media_type='application/octet-stream', headers={'ETag': '"' + item['sha256'] + '"'})
+
     @app.get('/media/{identifier}/{version}/{name}')
     def media(identifier: str, version: str, name: str):
         if not all(IDENTIFIER.fullmatch(part) for part in (identifier, version, name)):
@@ -82,6 +102,7 @@ def create_app(data_dir=None):
     @app.get('/characters/{identifier}')
     @app.get('/download')
     @app.get('/guide')
+    @app.get('/dialogues')
     def page(identifier: str | None = None):
         return FileResponse(ROOT / 'static' / 'index.html', headers={'Cache-Control': 'no-cache'})
 

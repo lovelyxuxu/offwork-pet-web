@@ -139,6 +139,8 @@ class CatalogTests(unittest.TestCase):
             self.assertEqual(response.status_code, 200)
             item = response.json()['items'][0]
             self.assertEqual((item['sceneCount'], item['lineCount']), (30, 360))
+            self.assertEqual(item['scheduleDefaults']['lunch'], '12:00')
+            self.assertEqual(item['scenes'][0]['when']['localTime'], ['06:00', '10:00'])
             self.assertNotIn('_path', item)
             downloaded = self.client.get(item['download_url'])
             self.assertEqual(downloaded.content, path.read_bytes())

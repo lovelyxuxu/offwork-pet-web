@@ -1,4 +1,4 @@
-import { dialogueSection, bindDialogues } from './dialogues.js?v=0.6.0-preview.4';
+import { dialogueSection, bindDialogues } from './dialogues.js?v=0.6.0-preview.5';
 
 const main = document.querySelector('main');
 const state = { characters: [], releases: [], tags: [], dialogues: [] };

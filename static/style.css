@@ -2381,3 +2381,12 @@ main:focus {
   .dialogue-label { width: 100%; }
   .dialogue-section { margin: 36px 0; }
 }
+
+/* Android receiver download, shares the responsive download layout. */
+.android-panel { margin-bottom: 32px; scroll-margin-top: 100px; }
+.android-visual { background: #eee9f8; min-height: 300px; }
+.android-visual>img.android-icon { position: static; width: 110px; height: 110px; border-radius: 26px; }
+.android-visual p { color: #7560a5; }
+.android-panel details { margin-top: 20px; }
+.android-panel summary { cursor: pointer; font-size: 13px; }
+@media(max-width: 700px) { .android-visual { min-height: 220px; } }

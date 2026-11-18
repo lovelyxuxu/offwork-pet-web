@@ -94,3 +94,9 @@ node --check static/app.js
 ## 加入 Codex 项目
 
 在“下班搭子 → 编辑项目 → 添加文件夹”中选择 `E:\study\python\offwork-pet-web` 并保存。保留 `offwork-pet` 为原有主文件夹，两个仓库可以在同一项目中协同工作。
+
+## 项目与许可
+
+[桌宠及搭子后端](https://github.com/lovelyxuxu/offwork-pet) · [Android 接收端](https://github.com/lovelyxuxu/offwork-pet-app) · [管理前端](https://github.com/lovelyxuxu/offwork-pet-admin-web)。
+
+项目自有代码和文档采用 [MIT](LICENSE)，导入的角色包保留各自许可。线上运行数据通过部署环境维护。

@@ -2390,3 +2390,9 @@ main:focus {
 .android-panel details { margin-top: 20px; }
 .android-panel summary { cursor: pointer; font-size: 13px; }
 @media(max-width: 700px) { .android-visual { min-height: 220px; } }
+
+.mac-panel { margin-top: 32px; scroll-margin-top: 100px; }
+.mac-visual { background: #e6edf2; justify-content: center; }
+.mac-visual p { color: #466174; }
+#creator { scroll-margin-top: 100px; }
+#creator .text-link { margin: 12px 0 0; }

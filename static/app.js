@@ -91,9 +91,30 @@ function androidDownloadPanel() {
   return `<section class="download-panel android-panel" id="android"><div class="download-visual android-visual"><img class="android-icon" src="/static/android-receiver.png" alt="搭子提醒图标"><span>安卓提醒接收端</span><p>接收电脑端的集会提醒</p></div><div class="download-content"><h2>搭子提醒 <span>v${e(androidRelease.version)}</span></h2><p>加入电脑端的集会，通过手机通知和震动接收提醒。</p><a class="button primary" href="${e(androidRelease.url)}" download>下载 Android APK <span>↓</span></a><span class="download-meta">Android 8.0 及以上 · ${mb(androidRelease.size)} · 预览版</span><div class="install-note"><strong>使用方式</strong><p>安装后输入电脑端的 8 位集会码，允许通知和后台运行，再开始接收。接收期间会保留一条静默状态通知。</p></div><details><summary>文件校验信息</summary><p class="checksum">SHA-256<br>${e(androidRelease.sha256)}</p></details></div></section>`;
 }
 
+function macDownloadPanel() {
+  return `<section class="download-panel mac-panel" id="macos">
+    <div class="download-visual mac-visual"><span>macOS</span><p>集会提醒接收端</p></div>
+    <div class="download-content">
+      <h2>RallyLite <span>预览版</span></h2>
+      <p>在 Mac 上加入集会并接收提醒，支持 Apple 芯片和 Intel。</p>
+      <a class="button primary" href="/offwork-pet/releases/RallyLite-macOS-universal-preview.zip" download>下载 macOS ZIP <span>↓</span></a>
+      <span class="download-meta">通用二进制 · 预览版</span>
+      <div class="install-note"><strong>首次打开</strong><p>完整解压 ZIP 后打开 RallyLite.app。此预览包尚未经过 Apple 公证。</p></div>
+    </div>
+  </section>`;
+}
+
+function creatorDownloadPanel() {
+  return `<section class="section" id="creator">
+    <div class="section-heading"><div><h2>角色制作工具</h2><p>下载制作模板、转换脚本和原创示例「小芽」。</p></div></div>
+    <a class="button outline" href="/offwork-pet/releases/OffworkPet-Character-Tools-2026-11-18.zip" download>下载角色制作工具 <span>↓</span></a>
+    <a class="text-link" href="/characters/offwork-seed">查看「小芽」角色 →</a>
+  </section>`;
+}
+
 function downloadPage() {
   const release = state.releases[0];
-  return `<section class="page-intro centered"><p class="eyebrow">TAKE A LITTLE COMPANY HOME</p><h1>桌面空了一角？<br>让小搭子<span class="highlight">住进来。</span></h1><p>下载、解压、打开。你的第一位小伙伴，就在桌面等你。</p></section>${androidDownloadPanel()}<section class="download-panel"><div class="download-visual"><div class="windows-logo"><i></i><i></i><i></i><i></i></div><span>Windows 桌面版</span><p>给日常多一点可爱。</p>${featured()[0] ? `<img src="${e(featured()[0].preview_url)}" alt="桌宠预览">` : ''}</div><div class="download-content"><div class="eyebrow">READY WHEN YOU ARE</div><h2>下班搭子 <span>${release ? `v${e(release.version)}` : ''}</span></h2><p>下班倒计时、桌面陪伴、角色互动。<br>也能邀请远方的搭子，互相打个气。</p>${release ? `<a class="button primary" href="${e(url(release.url))}" download>下载 Windows 完整包 <span>↓</span></a><span class="download-meta">${mb(release.size)} · ZIP 压缩包 · ${date(release.publishedAt)} 发布 · ${release.channel === 'preview' ? '预览版' : '正式版'}</span>` : `<p class="notice">软件下载正在准备中，稍后再来看看。</p>`}<div class="install-note"><strong>第一次安装</strong><p>请完整解压到独立文件夹，再打开 OffworkPet.exe。<br>保留压缩包中的配套文件，不要直接在压缩包内运行。</p></div><a class="text-link" href="/guide">已有旧版？查看更新方式 →</a></div></section><section class="section release-section"><div class="section-heading"><div><p class="eyebrow">GETTING BETTER, LITTLE BY LITTLE</p><h2>一点点，变得更好。</h2><p>每次更新，都想让陪伴再自然一点。</p></div><span class="muted">更新记录</span></div>${state.releases.map(releaseCard).join('') || empty('更新记录准备中')}</section>`;
+  return `<section class="page-intro centered"><p class="eyebrow">TAKE A LITTLE COMPANY HOME</p><h1>桌面空了一角？<br>让小搭子<span class="highlight">住进来。</span></h1><p>下载、解压、打开。你的第一位小伙伴，就在桌面等你。</p></section>${androidDownloadPanel()}<section class="download-panel"><div class="download-visual"><div class="windows-logo"><i></i><i></i><i></i><i></i></div><span>Windows 桌面版</span><p>给日常多一点可爱。</p>${featured()[0] ? `<img src="${e(featured()[0].preview_url)}" alt="桌宠预览">` : ''}</div><div class="download-content"><div class="eyebrow">READY WHEN YOU ARE</div><h2>下班搭子 <span>${release ? `v${e(release.version)}` : ''}</span></h2><p>下班倒计时、桌面陪伴、角色互动。<br>也能邀请远方的搭子，互相打个气。</p>${release ? `<a class="button primary" href="${e(url(release.url))}" download>下载 Windows 完整包 <span>↓</span></a><span class="download-meta">${mb(release.size)} · ZIP 压缩包 · ${date(release.publishedAt)} 发布 · ${release.channel === 'preview' ? '预览版' : '正式版'}</span>` : `<p class="notice">软件下载正在准备中，稍后再来看看。</p>`}<div class="install-note"><strong>第一次安装</strong><p>请完整解压到独立文件夹，再打开 OffworkPet.exe。<br>保留压缩包中的配套文件。联网时打开“搭子 → 服务器”，填写 <code>http://106.54.27.8</code> 后开启。</p></div><a class="text-link" href="/guide">已有旧版？查看更新方式 →</a></div></section>${macDownloadPanel()}${creatorDownloadPanel()}<section class="section release-section"><div class="section-heading"><div><p class="eyebrow">GETTING BETTER, LITTLE BY LITTLE</p><h2>一点点，变得更好。</h2><p>每次更新，都想让陪伴再自然一点。</p></div><span class="muted">更新记录</span></div>${state.releases.map(releaseCard).join('') || empty('更新记录准备中')}</section>`;
 }
 
 function guide() {
